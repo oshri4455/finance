@@ -1,0 +1,11 @@
+
+key : GOOGLE_CLIENT_ID id:79150934273-en5r0sfn6hhgbtn4604rjgf7n2b607hu.apps.googleusercontent.com
+
+
+
+
+
+key : MONGODB_URI id:mongodb+srv://oshrishafa47:59742817Os@cluster1.xflo2tb.mongodb.net/Users
+
+
+את שתי אלה שמים בvar בerouku ומוודאים שהorigin url בגוגל תואם לקישור של הheroku

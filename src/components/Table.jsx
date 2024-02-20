@@ -1,7 +1,7 @@
 import React, { useState,useEffect } from 'react'
 import './style.css'
 
-import { json, useNavigate } from 'react-router-dom';
+import {  useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import Cookies from 'js-cookie'
 import Modal  from 'react-bootstrap/Modal';
@@ -481,9 +481,9 @@ const inputes = (row) => {
   const [showAlertPrice, setShowAlertPrice] = useState(false);
   const[showAlertQuantity,setShowAlertQuantity] = useState(false)
   const handleClosePrice = () => setShowAlertPrice(false);
-  const handleShowPrice = () => setShowAlertPrice(true);
+  
   const handleCloseQuantity = () => setShowAlertQuantity(false);
-  const handleShowQuantity = () => setShowAlertQuantity(true);
+  
 
   const Logout = async () => {
     try {

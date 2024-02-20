@@ -158,7 +158,6 @@ const addUsers = (u, p, r, e) => {
       setTickers(state.tickers);
     }
   };
-  
   const saveUserStateToLocalStorage = () => {
     const state = {
       tickers: Tickers,

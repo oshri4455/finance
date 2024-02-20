@@ -164,6 +164,10 @@ const addUsers = (u, p, r, e) => {
   }, []); 
   
   useEffect(() => {
+    loadStateFromLocalStorage();
+  }, [loadStateFromLocalStorage]); // הוספת תלות עבור loadStateFromLocalStorage
+  
+  useEffect(() => {
     const saveToLocalStorage = () => {
       saveStateToLocalStorage();
       if (currentUser) {
@@ -171,9 +175,10 @@ const addUsers = (u, p, r, e) => {
       }
     };
   
-    saveToLocalStorage(); 
-
-  }, [users, Tickers, currentUser]); 
+    saveToLocalStorage(); // קריאה לפונקציה בכניסה ראשונית של ה־useEffect
+  
+    // אם נרצה שהפונקציה תופעל רק בעת שינוי באחד מהמשתנים, יש להוסיף אותם לתלות
+  }, [saveStateToLocalStorage, saveUserStateToLocalStorage, currentUser]); // הוספת תלות עבור כל המשתנים והפונקציות שמשמשות בתוך useEffect זה
 
 //מוחקת שורות מהטבלה
 

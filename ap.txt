@@ -1,0 +1,76 @@
+const deleteAll = (username) => {
+  if (window.confirm("Are you sure you want to delete all rows?")) {
+    const updatedUsers = [...users];
+    const userIndex = updatedUsers.findIndex(user => user.userName === username);
+
+    if (userIndex !== -1) {
+      const updatedUser = { ...updatedUsers[userIndex] };
+      updatedUser.Tickers = [defaultRow]; // reset the Tickers array to defaultRow
+      updatedUsers[userIndex] = updatedUser;
+      setUsers(updatedUsers);
+      localStorage.setItem('Users', JSON.stringify(updatedUsers));
+
+      // Sending the request to the server
+      fetch(`/deleteAll/${username}`, { // assuming username is unique
+        method: 'DELETE',
+      })
+      .then(res => res.json())
+      .then(data => console.log(data.message))
+      .catch(err => console.error(err));
+
+      // Clearing the input values
+      Tickers.forEach((val, index) => {
+        document.getElementById(`quantity${index}`).value = '';
+        document.getElementById(`Ticker${index}`).value = '';
+        document.getElementById(`price${index}`).value = '';
+        document.getElementById(`exit${index}`).value = '';
+        document.getElementById(`stop${index}`).value = '';
+      });
+    } else {
+      console.log(`User ${username} not found`);
+    }
+  }
+};
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ <Route  path='/' element = {<Home addUsers = {addUsers} users = {users} getName = {getName}         />}         />
+
+
+
+      {users.map((val, index) => {
+ 
+ return <Route   path={`/user/:id`} element={<Table row={row} defaultRow = {defaultRow} userName = {val.userName} users={users} setFlag ={setFlag} index={index} Ticker = {val.Ticker} Quantity={val.Quantity} price={val.price} ExpectedLose={val.ExpectedLose} ExitPrice={val.ExitPrice} StopLose={val.StopLose} setUsers={setUsers} deleteAll={deleteAll} clearTable={clearTable} data={data} saveData={saveData} Tickers={val.Tickers} addTickers={addTickers} delRow={delRow} setTickers={setTickers} />} />
+    })}
+      <Route path='/package1' element={<Package1 setRow={setRow} setTickers = {setTickers} Tickers = {Tickers}  clearTable = {clearTable}/>}/>
+      <Route path='/package2' element={<Package2 setRow={setRow}/>}/>
+      <Route path='/package3' element={<Package3 setRow={setRow}/>}/>
+      <Route path='/registr' element={<Registr handleClick = {handleClick}  />}/>
+      {users.map((val,index)=>{
+        return <Route path='/reshom' element={<Reshom userName = {val.userName}  users = {users}   />}/>
+      })}
+    </Routes>
+
+    </BrowserRouter>
+
+
+
+
+
+
+
+
+
+import { v4 as uuidv4 } from 'uuid';

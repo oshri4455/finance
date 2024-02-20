@@ -296,7 +296,6 @@ const clearButton = (username,index) => {
 
 
 
-// save input value
 useEffect(() => {
   const savedQuantityValue = localStorage.getItem('inputValue');
   if (savedQuantityValue) {
@@ -318,7 +317,7 @@ useEffect(() => {
   } else {
     localStorage.setItem('inputValue', JSON.stringify(props.defaultRow.Quantity));
   }
-}, []);
+}, [props.Tickers]); // הוספת תלות ל־props.Tickers
 
 useEffect(() => {
   const savedTickerValue = localStorage.getItem('TickerValue');
@@ -337,7 +336,7 @@ useEffect(() => {
   } else {
     localStorage.setItem('TickerValue', JSON.stringify(props.defaultRow.Ticker));
   }
-}, []);
+}, [props.Tickers]); // הוספת תלות ל־props.Tickers
 
 useEffect(() => {
   const savedPriceValue = localStorage.getItem('priceValue');
@@ -360,7 +359,7 @@ useEffect(() => {
   } else {
     localStorage.setItem('priceValue', JSON.stringify(props.defaultRow.price));
   }
-}, []);
+}, [props.Tickers]);
 
 useEffect(() => {
   const savedExitValue = localStorage.getItem('exitValue');
@@ -383,7 +382,7 @@ useEffect(() => {
   } else {
     localStorage.setItem('exitValue', JSON.stringify(props.defaultRow.ExitPrice));
   }
-}, []);
+}, [props.Tickers]);
 
 useEffect(() => {
   const savedStopValue = localStorage.getItem('stopValue');
@@ -402,8 +401,7 @@ useEffect(() => {
   } else {
     localStorage.setItem('stopValue', JSON.stringify(props.defaultRow.StopLose));
   }
-}, []);
-
+}, [props.Tickers]);
 
 
 

@@ -172,7 +172,7 @@ useEffect(() => {
 
 useEffect(() => {
   handlePageLoad();
-}, [isLoggedIn]); // הוספנו את המשתנה isLoggedIn כמערך תלות לפונקציית useEffect
+}, [isLoggedIn]); 
 
 
 const clientId = process.env.REACT_APP_GOOGLE_CLIENT_ID;

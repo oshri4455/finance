@@ -45,8 +45,9 @@ function App() {
   });
 
   useEffect(() => {
-    localStorage.setItem(`row_${firstName}`, row.toString());
-  }, [row, firstName]);
+    // Save the value to localStorage whenever it changes
+    localStorage.setItem(`user${firstName}`, row.toString());
+  }, [row, firstName]); // נוסיף גם את firstName כתלות כדי שהכל יתרענן כאשר הוא משתנה
 
   const [data, setData] = useState(null);
 
@@ -84,21 +85,45 @@ function App() {
       console.error('An error occurred:', error);
     });
   };
-
-  const loadStateFromLocalStorage = () => {
-    const storedState = localStorage.getItem('appState');
-    if (storedState) {
-      const state = JSON.parse(storedState);
-      if (state && state.users) {
-        setUsers(state.users);
-        const currentUser = localStorage.getItem('currentUser');
-        if (currentUser) {
-          setCurrentUser(currentUser);
-          loadUserStateFromLocalStorage(currentUser);
+  useEffect(() => {
+    const loadStateFromLocalStorage = () => {
+      const storedState = localStorage.getItem('appState');
+      if (storedState) {
+        const state = JSON.parse(storedState);
+        if (state && state.users) {
+          setUsers(state.users);
+          const currentUser = localStorage.getItem('currentUser');
+          if (currentUser) {
+            setCurrentUser(currentUser);
+            loadUserStateFromLocalStorage(currentUser);
+          }
         }
       }
-    }
-  };
+    };
+   
+
+    const saveStateToLocalStorage = () => {
+      const state = {
+        users,
+        currentUser: currentUser,
+      };
+      localStorage.setItem('appState', JSON.stringify(state));
+      localStorage.setItem('currentUser', currentUser);
+    };
+  
+    const saveUserStateToLocalStorage = () => {
+      const state = {
+        tickers: Tickers,
+      };
+      localStorage.setItem(`appState_${currentUser}`, JSON.stringify(state));
+    };
+  
+    loadStateFromLocalStorage();
+    saveStateToLocalStorage();
+    saveUserStateToLocalStorage();
+  
+  }, [users, currentUser, Tickers, loadUserStateFromLocalStorage]); // תוסיף תלות ל־loadUserStateFromLocalStorage
+  
 
   const saveStateToLocalStorage = () => {
     const state = {
@@ -128,13 +153,7 @@ function App() {
     localStorage.setItem(`appState_${currentUser}`, JSON.stringify(state));
   };
 
-  useEffect(() => {
-    loadStateFromLocalStorage();
-  }, []);
 
-  useEffect(() => {
-    loadStateFromLocalStorage();
-  }, [loadStateFromLocalStorage]);
 
   useEffect(() => {
     const saveToLocalStorage = () => {

@@ -1,5 +1,5 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
+
 import './signup.css'
 export default function Registr(props) {
   return (

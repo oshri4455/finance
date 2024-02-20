@@ -7,7 +7,7 @@ import jwt_decode from 'jwt-decode'
 import './style.css'
 import './signup.css'
 import Cookies from 'js-cookie'
-import axios from 'axios'
+
 
 
 

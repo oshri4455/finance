@@ -174,7 +174,7 @@ const addUsers = (u, p, r, e) => {
     if (currentUser) {
       saveUserStateToLocalStorage();
     }
-  }, [users, Tickers, currentUser, defaultRow, saveStateToLocalStorage, saveUserStateToLocalStorage]);
+  }, [users, Tickers, currentUser]); // רק המשתנים המשתנים
 
 //מוחקת שורות מהטבלה
 

@@ -52,8 +52,7 @@ const[firstName,setFirstName]=useState('')
   // }, [row]);
    
  
- 
-  
+
 // Retrieve the stored row value from localStorage on component mount
 useEffect(() => {
   const storedRow = localStorage.getItem(`row_${firstName}`);
@@ -129,19 +128,14 @@ const addUsers = (u, p, r, e) => {
       const state = JSON.parse(storedState);
       if (state && state.users) {
         setUsers(state.users);
-        // check if currentUser exists in LocalStorage
         const currentUser = localStorage.getItem('currentUser');
         if (currentUser) {
           setCurrentUser(currentUser);
-          // Load current user state if user exists
           loadUserStateFromLocalStorage(currentUser);
-        } else {
-          // handle case when no user exists in LocalStorage
         }
       }
     }
   };
-  
   const saveStateToLocalStorage = () => {
     const state = {
       users,
@@ -174,7 +168,7 @@ const addUsers = (u, p, r, e) => {
     if (currentUser) {
       saveUserStateToLocalStorage();
     }
-  }, [users, Tickers, currentUser]); // רק המשתנים המשתנים
+  }, [users, Tickers, currentUser]);
 
 //מוחקת שורות מהטבלה
 

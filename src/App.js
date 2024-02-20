@@ -164,11 +164,17 @@ const addUsers = (u, p, r, e) => {
   }, []); // הוספת תלות ריקה, מה שיגרום לפונקציה להתבצע רק פעם אחת ברכיב מותקן
   
   useEffect(() => {
-    saveStateToLocalStorage();
-    if (currentUser) {
-      saveUserStateToLocalStorage();
-    }
-  }, [users, Tickers, currentUser, saveStateToLocalStorage, saveUserStateToLocalStorage]); // הוספת תלות עבור כל המשתנים והפונקציות שמשמשים בתוך useEffect
+    const saveToLocalStorage = () => {
+      saveStateToLocalStorage();
+      if (currentUser) {
+        saveUserStateToLocalStorage();
+      }
+    };
+  
+    saveToLocalStorage(); // קריאה לפונקציה בכניסה ראשונית של ה־useEffect
+  
+    // אם נרצה שהפונקציה תופעל רק בעת שינוי באחד מהמשתנים, יש להוסיף אותם לתלות
+  }, [users, Tickers, currentUser]); // הוספת תלות עבור כל המשתנים שמשמשים בתוך useEffect
 
 //מוחקת שורות מהטבלה
 

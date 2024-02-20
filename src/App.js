@@ -30,7 +30,7 @@ function App() {
 
   
 
-const [startTime, setStartTime] = useState(null);
+
 const [users,setUsers] =useState([])
 const[firstName,setFirstName]=useState('')
   //rows
@@ -161,7 +161,7 @@ const addUsers = (u, p, r, e) => {
   
   useEffect(() => {
     loadStateFromLocalStorage();
-  }, []); // הוספת תלות ריקה, מה שיגרום לפונקציה להתבצע רק פעם אחת ברכיב מותקן
+  }, []); 
   
   useEffect(() => {
     const saveToLocalStorage = () => {
@@ -171,10 +171,9 @@ const addUsers = (u, p, r, e) => {
       }
     };
   
-    saveToLocalStorage(); // קריאה לפונקציה בכניסה ראשונית של ה־useEffect
-  
-    // אם נרצה שהפונקציה תופעל רק בעת שינוי באחד מהמשתנים, יש להוסיף אותם לתלות
-  }, [users, Tickers, currentUser]); // הוספת תלות עבור כל המשתנים שמשמשים בתוך useEffect
+    saveToLocalStorage(); 
+
+  }, [users, Tickers, currentUser]); 
 
 //מוחקת שורות מהטבלה
 

@@ -430,7 +430,7 @@ useEffect(() => {
 const inputes = (row) => {
 
   //const row = 9
-  if(props.Tickers.length == row){
+  if(props.Tickers.length === row){
     
     if(row==9){
       nav('/package1')

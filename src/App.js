@@ -364,65 +364,6 @@ const clearTable = () => {
 
 };
 
-const [buttonClicked, setButtonClicked] = useState(localStorage.getItem('buttonClicked') === 'true');
-
-
-// סופרת חצי שנה לגרסה החנמית 
-useEffect(() => {
-  const oneEightyDays = 180 * 24 * 60 * 60 * 1000;
-
-  if (!buttonClicked && localStorage.getItem('180DaysStartTime') === null) {
-    // localStorage.setItem('180DaysStartTime', Date.now().toString());
-  }
-
-  const startTime180 = parseInt(localStorage.getItem('180DaysStartTime'), 10);
-
-  if (!buttonClicked && startTime180) {
-    const interval = setInterval(() => {
-      const timePassed = Date.now() - startTime180;
-      const timeLeft = oneEightyDays - timePassed;
-      if (timeLeft <= 0) {
-        console.log('180 days have passed');
-        clearTable();//מוחקת את הטבלה לאחר 90 יום
-        clearInterval(interval);
-      } 
-    }, 1000);
-    
-    return () => clearInterval(interval);
-  }
-}, [buttonClicked]);
-// סופרת 30 ימים לגרסה שבתשלום כולל רענון הדף 
-useEffect(() => {
-  const thirtyDays = 30 * 24 * 60 * 60 * 1000;
-  let startTime30;
-
-  if (buttonClicked) {
-    if (localStorage.getItem('30DaysStartTime') === null) {
-      startTime30 = Date.now();
-      localStorage.setItem('30DaysStartTime', startTime30.toString());
-    } else {
-      startTime30 = parseInt(localStorage.getItem('30DaysStartTime'), 10);
-    }
-
-    const interval = setInterval(() => {
-      const timePassed = Date.now() - startTime30;
-      const timeLeft = thirtyDays - timePassed;
-      if (timeLeft <= 0) {
-        console.log('30 days have passed');
-        clearTable();//מוחקת את הטבלה לאחר 30 יום
-        clearInterval(interval);
-      } 
-    }, 1000);
-    
-    return () => clearInterval(interval);
-  }
-}, [buttonClicked]);
-//בעת לחיצה על כפתור המנוי החינמי נעלם ומתחילה ספירה של 30 יום
-const handleClick = () => {
-  setButtonClicked(true);
-  localStorage.setItem('buttonClicked', 'true');
-  localStorage.removeItem('180DaysStartTime');
-};
 
 
 
@@ -449,7 +390,7 @@ return <Route    path={`/user/${val.id}`} element={<Table row={row} id = {val.id
 <Route path='/package1' element={<Package1 setRow={setRow} setTickers = {setTickers} Tickers = {Tickers}  clearTable = {clearTable}/>}/>
 <Route path='/package2' element={<Package2 setRow={setRow}/>}/>
 <Route path='/package3' element={<Package3 setRow={setRow}/>}/>
-<Route path='/registr' element={<Registr handleClick = {handleClick}  />}/>
+<Route path='/registr' element={<Registr   />}/>
 {users.map((val,index)=>{
   return <Route path='/reshom' element={<Reshom userName = {val.userName}  users = {users}   />}/>
 

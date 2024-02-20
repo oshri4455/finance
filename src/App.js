@@ -144,6 +144,11 @@ const addUsers = (u, p, r, e) => {
     localStorage.setItem('appState', JSON.stringify(state));
     localStorage.setItem('currentUser', currentUser);
   };
+
+  
+  useEffect(() => {
+    saveStateToLocalStorage();
+  }, [users, currentUser]); // כאן אנחנו מוסיפים תלות לשינויים ב־users ו־currentUser כדי לזמן את השמירה ב־localStorage בהתאם לשינויים שלהם
   
   const loadUserStateFromLocalStorage = (user) => {
     const storedState = localStorage.getItem(`appState_${user}`);
